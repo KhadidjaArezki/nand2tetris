@@ -1,0 +1,86 @@
+/*  
+ * TODO: Task 01: When a snake is created, it always moves up
+ * The player can move the snake in one of four directions - left, right, up, down
+ * Create methods: moveup, moveDown, moveLeft, moveRight
+ * TODO: Task 02: When the snake coords match the apple's coords,
+ * the snake's tail grows by a certain amount 
+ * Create method: grow
+ * TODO: Task 03: When the coords of the snake's head matches
+ * the coords of its tail, the tail restores its original length
+ * Create method: shrink
+ * TODO: When a snake dissapears from the top or bottom of the screen 
+ * it must appear on the other side of the screen
+ * 
+ * address = 32*y + x/16
+ * value = Memory.peek[16384 + address]
+ * value[x%16] = 1 | 0
+ * do Memory.poke(address, value)
+ */
+
+class Snake {
+  field int x, y; // screen location of the snake's top-left corner
+  field int length; // length of this snake, in pixels
+  field int tailStart;
+  static int memAddress;
+  let memAddress = 16384;
+
+  constructor Snake new() {
+   let x = 0;
+   let y = 0;
+   let tailStart = 1056;
+   do draw(432);
+   return this;
+  }
+  
+  method void grow() {
+    do Memory.poke(tailStart, 1016);
+    do Memory.poke(tailStart+32, 1016);
+    do Memory.poke(tailStart+64, 496);
+    do Memory.poke(tailStart+96, 496);
+    let tailStart = tailStart+64
+  }
+
+  method void dispose() {
+    do Memory.deAlloc(this);
+    return;
+  }
+   
+  method void draw (int location) {
+	  do Memory.poke(memAddress+0, 496);
+	  do Memory.poke(memAddress+32, 1016);
+	  do Memory.poke(memAddress+64, 2044);
+	  do Memory.poke(memAddress+96, 4094);
+	  do Memory.poke(memAddress+128, 6643);
+	  do Memory.poke(memAddress+160, 8191);
+	  do Memory.poke(memAddress+192, 4094);
+	  do Memory.poke(memAddress+224, 4094);
+	  do Memory.poke(memAddress+256, 2044);
+	  do Memory.poke(memAddress+288, 1016);
+	  do Memory.poke(memAddress+320, 1016);
+	  do Memory.poke(memAddress+352, 1016);
+	  do Memory.poke(memAddress+384, 1016);
+	  do Memory.poke(memAddress+416, 1016);
+	  do Memory.poke(memAddress+448, 1016);
+  	do Memory.poke(memAddress+480, 1016);
+  	do Memory.poke(memAddress+512, 1016);
+  	do Memory.poke(memAddress+544, 1016);
+  	do Memory.poke(memAddress+576, 1016);
+  	do Memory.poke(memAddress+608, 1016);
+  	do Memory.poke(memAddress+640, 1016);
+  	do Memory.poke(memAddress+672, 1016);
+  	do Memory.poke(memAddress+704, 1016);
+  	do Memory.poke(memAddress+736, 1016);
+  	do Memory.poke(memAddress+768, 1016);
+  	do Memory.poke(memAddress+800, 1016);
+  	do Memory.poke(memAddress+832, 1016);
+  	do Memory.poke(memAddress+864, 1016);
+  	do Memory.poke(memAddress+896, 1016);
+  	do Memory.poke(memAddress+928, 1016);
+  	do Memory.poke(memAddress+960, 1016);
+  	do Memory.poke(memAddress+992, 1016);
+  	do Memory.poke(memAddress+1024, 1016);
+  	do Memory.poke(memAddress+1056, 496);
+  	do Memory.poke(memAddress+1088, 496);
+	return;
+  }
+}

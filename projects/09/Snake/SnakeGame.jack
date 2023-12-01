@@ -1,0 +1,40 @@
+class SnakeGame {
+  field Snake snake;
+  field Apple apple;
+  field int direction
+  
+  constructor SnakeGame new() {
+    let snake = Snake.new();
+    let apple = Apple.new();
+    let direction = 1;  // initial state is up
+    return this;
+  }
+  
+  method void moveSnake() {
+    if (direction = 1) { do snake.moveUp(); }
+    if (direction = 2) { do snake.moveDown(); }
+    if (direction = 3) { do snake.moveLeft(); }
+    if (direction = 4) { do snake.moveRight(); }
+    do Sys.wait(5);  // delays the next movement
+    return;
+  }
+  
+  method void run() {
+    var char key;  // the key currently pressed by the user
+    var boolean exit;
+    let exit = false;
+    
+    while (~exit) {
+      // TODO: WRITE GAME LOGIC
+    }
+    return;
+  }
+  
+  /** Disposes this game. */
+   method void dispose() {
+      do snake.dispose();
+      do apple.dispose();
+      do Memory.deAlloc(this);
+      return;
+   }
+}

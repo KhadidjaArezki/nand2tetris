@@ -1,0 +1,36 @@
+/** Initializes a new Snake game and starts running it. */
+class Main {
+    function void main() {
+      /*var Snake snake;
+      var Apple apple;
+      let snake = Snake.new();
+      let apple = Apple.new();
+      var SnakeGame game;
+      let game = SnakeGame.new();
+      do game.run();
+      do game.dispose();*/
+      //var Array arr;
+      //var Array shiftedArr;
+      
+      //let arr = Array.new(16);
+      //let shiftedArr = Array.new(16);
+      //let arr = Utils.decToBin(7); // 0000000000000111
+      //let shiftedArr = Utils.shiftLeft(arr); // 0000000000001110 = 14
+      //do Output.printString(Utils.intArrayToString(shiftedArr));
+      //do Output.printInt(Utils.xor(7, Utils.binToDec(shiftedArr))); // 00000000000001001 = 9
+      var Apple apple;
+      var int i;
+      let apple = Apple.new();
+      let i = 0;
+      do Utils.setRandVal(1061);
+      while(i < 1000) {
+        //do Output.printInt(Utils.rand(8192));
+        //do Output.printString("--");
+        do apple.draw();
+        let i = i+1;
+      }
+      do apple.dispose();
+      //do shiftedArr.dispose();
+      return;
+    }
+}

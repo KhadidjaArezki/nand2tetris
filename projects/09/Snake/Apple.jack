@@ -1,0 +1,46 @@
+/*
+ * TODO: When the game starts, the apple appears at a random lacation on the screen
+ * Create method: getRandomLocation => set x and y coords of the apple
+ * TODO: When the snake's coords match with the apple's coords,
+ * the apple disappears and appears in a different location
+ * Create method: erase
+ */
+class Apple {
+  field int x, y; // screen location of the apple
+  static int location; // memory address where the drawing of the apple starts
+   
+  constructor Apple new() {
+     let x = 0;
+     let y = 0;
+     do draw();
+     return this;
+  }
+  
+  method void dispose() {
+      do Memory.deAlloc(this);
+      return;
+  }
+   
+  method void draw() {
+    var int memAddress;
+    let location = Utils.rand(7500);
+	  let memAddress = 16384+location;
+	  do Memory.poke(memAddress+0, 0);
+	  do Memory.poke(memAddress+32, 96);
+	  do Memory.poke(memAddress+64, 224);
+	  do Memory.poke(memAddress+96, 192);
+	  do Memory.poke(memAddress+128, 384);
+	  do Memory.poke(memAddress+160, 2016);
+	  do Memory.poke(memAddress+192, 4080);
+	  do Memory.poke(memAddress+224, 8120);
+	  do Memory.poke(memAddress+256, 8184);
+	  do Memory.poke(memAddress+288, 8184);
+	  do Memory.poke(memAddress+320, 4080);
+	  do Memory.poke(memAddress+352, 2016);
+	  do Memory.poke(memAddress+384, 960);
+	  do Memory.poke(memAddress+416, 0);
+	  do Memory.poke(memAddress+448, 0);
+	  do Memory.poke(memAddress+480, 0);
+	  return;
+  }
+}

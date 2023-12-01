@@ -1,0 +1,147 @@
+class Utils {
+  static int randVal;
+  
+  function void setRandVal(int v) {
+    let randVal = v;
+    return;
+  }
+  
+  function int getRandVal() {
+    return randVal;
+  }
+  
+  function Array decToBin(int dec) {
+    var Array arr;
+    var int i;
+    let arr = Array.new(16);
+    let i = 0;
+    while (dec > 0) {
+      let arr[i] = Utils.mod(dec, 2);
+      let dec = dec/2;
+      let i = i+1;
+    }
+    return arr;
+  }
+  
+  function int binToDec(Array arr) {
+    var int res;
+    var int i;
+    let res = 0;
+    let i = 0;
+    while (i < 16) {
+      let res = res + (arr[i] * Utils.power(2, i));
+      let i = i+1;
+    }
+    return res;
+  }
+  
+  function Array shiftLeft(Array arr) {
+    /*
+     * Inserts a 0 bit on the right and shifts all 
+     * remaining bits by one position to the left.
+     * Semantically, it's the same as multiplying the
+     * integer represented by the array of bits with 2**n.
+     */
+    var Array shiftedArr;
+    var int i;
+    let shiftedArr = String.new(16);
+    let i = 0;
+    while (i < 16) {
+      if (i = 0) { let shiftedArr[i] = 0; }
+      else {
+        let shiftedArr[i] = arr[i-1];
+      }
+      let i = i+1;
+    }
+    return shiftedArr;
+  }
+  
+  function int shiftedInt(int x) {
+    var Array shiftedBinXArr;
+    let shiftedBinXArr = Math.shiftLeft(Math.decToBin(x));
+    return Math.binToDec(shiftedBinXArr);
+  }
+  
+  function int xor(int a, int b) {
+    return ((a & (~b)) | ((~a) & b));
+  }
+  
+  function int randL(int max) {
+    /*
+      The increment and modulus should have no common factors.
+      (multiplier - 1) should be divisible by all the prime factors of the modulus.
+      If the modulus is a multiple of 4, then the multiplier should also be a multiple of four.
+    */
+    var int a, b, m, val;
+    let a = 16807;
+    let m = 32749;
+    let val = Utils.mod(Math.abs(a * randVal), m);
+    while ((val < 0) | (val > max)) {
+      let val = Utils.mod(Math.abs(a * val), m);
+    }
+    do Utils.setRandVal(val);
+    return val;
+    /* create an array of size N
+       loop over array positions
+       fill each ith position with the number i
+       Shuffle the array
+          Loop over array K times, and in every iteration,
+          get two random array indexes and swap the two elements there.
+             METHOD 01: XORSHIFT x xor shifted_x
+             METHOD 02:  X_{n+1} = (a*X_n + b) mod m where a, b and m are large integers,
+             and X_{n+1} is the next in X as a series of pseudorandom numbers.
+             The maximum number of numbers the formula can produce is the modulus, m)
+       Store the position of the next array element randomArrPointer - at start = 0
+       return randomArr[randomArrPointer] */
+  }
+  
+  function int randXS() {
+    /*xorshift_seed = # The initial seed should go here
+
+    def xorshift():
+      global xorshift_seed
+      xorshift_seed ^= xorshift_seed << 13
+      xorshift_seed ^= xorshift_seed >> 17
+      xorshift_seed ^= xorshift_seed << 5
+      xorshift_seed %= int("ffffffff", 16) # The modulus limits it to a 32-bit number
+      return xorshift_seed */
+  }
+  
+  function int randMS() {
+    /* seed = 1234
+       r1 = 1234^2 = 01522756 => return 5227
+       r2 = 5227^2 = 27321529 => return 3215
+    */
+  }
+  
+  
+  function String intArrayToString(Array arr) {
+    var String arrStr;
+    var int i;
+    var String str;
+    var char c;
+    let arrStr = String.new(16);
+    let str = String.new(1);
+    let i = 15;
+    while (i > -1) {
+      do str.setInt(arr[i]);
+      let c = str.charAt(0);
+      do arrStr.appendChar(c);
+      let i = i-1;
+    }
+    do str.dispose();
+    return arrStr;
+  }
+  
+  function int mod(int n, int m) {
+    return n - ((n/m) * m);
+  }
+  
+  function int power(int n, int m) {
+    if (m = 0) {
+      return 1;
+    } else {
+      return n * Utils.power(n, (m-1));
+    }
+  }
+}
